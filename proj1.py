@@ -3,7 +3,8 @@ import numpy as np
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-
+from googleapiclient.discovery import build
+import pprint
 #print(sw_nltk)
 import urllib2  # the lib that handles the url stuff
 from sklearn.feature_extraction.text import TfidfVectorizer #used to make document vectors 
@@ -115,8 +116,24 @@ def process_feedback(links):
         return True, relevant_links
     else:
         return False, relevant_links
-    
+
+
 def main():
+    service = build(
+        "customsearch", "v1", developerKey="AIzaSyC0vz_nYIczwBwNupqMrNhmBm4dQbX5Pbw"
+    )
+
+    res = (
+        service.cse()
+        .list(
+            q="columbia",
+            cx="7260228cc892a415a",
+        )
+        .execute()
+    )
+    pprint.pprint(res)
+    for result in res['items']:
+        print(result.get('link'))
     links = ['1','2','3','4','5','6','7','8','9','10']
     result, relevant_links = process_feedback(links)
     print(result)
