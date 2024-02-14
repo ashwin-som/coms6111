@@ -1,3 +1,103 @@
+#just some pseudocode/ideas for part 4: 
+import numpy as np 
+import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+
+#print(sw_nltk)
+import urllib2  # the lib that handles the url stuff
+from sklearn.feature_extraction.text import TfidfVectorizer #used to make document vectors 
+from sklearn.metrics.pairwise import cosine_similarity
+'''
+Represent query as weighted tf-idf vector
+● Represent documents as weighted tf-idf vectors
+● Compute cosine similarity score for query vector
+and each document vector
+● Rank documents with respect to query by score
+● Return the top K (e.g., K = 10) documents to
+user
+44
+
+'''
+
+
+
+def link_to_text(target_url)
+    data = urllib2.urlopen(target_url) # it's a file like object and works just like a file
+    return_str = ""
+    for line in data: # files are iterable
+        return_str += line
+    return return_str
+
+
+def text_vectors(text):
+    ''' given a text, generate the vectors for the documents'''
+    #stop words 
+    sw_nltk = stopwords.words('english')
+    stop_set = stop(sw_nltk)
+    #clean up text 
+
+    #covert to tokens 
+    text = word_tokenize(text)
+
+    #remove stop words 
+    good_text = "" #not positive if this was done properly 
+    for word in text:
+        if word not in stop_set:
+            good_text += word
+            good_text += " "
+
+
+    vectorizer = TfidfVectorizer()
+    mat = vectorizer.fit_transform(good_text) #td-idf vectors 
+    cosine_similarity(query_vector, tfidf_matrix)
+    #extract most relevant column 
+    id = cosine_similarities.argmax()
+    important_vec = mat[id]
+
+    return important_vec
+
+
+#not sure what to set og_query_weight, related_weight, unrelated_weights to? think this may need to be a part we figure out 
+#not exactly sure what og_query_vector will be? 
+#also given new query vector - how do we get the exact words? 
+def rocchios(query_words,og_query_vector, related_links,unrelated_links,og_query_weight, related_weight, unrelated_weight):
+    #how to generate the vector for a document 
+    related_vectors = []
+    for link in related_links:
+        #convert to text 
+        text = link_to_text(link)
+        #convert to vector 
+        vector = text_vector(text)
+        related_vectors.append(vector)
+    related_vectors = np.array(related_vectors)
+
+    unrelated_vectors = []
+    for link2 in unrelated_links:
+        #convert to text 
+        text2 = link_to_text(link2)
+        #convert to vector 
+        vector2 = text_vector(text2)
+        unrelated_vectors.append(vector2)
+    unrelated_vectors = np.array(unrelated_vectors)
+
+    #get sums of vectors
+    r_sum = np.sum(related_vectors)
+    ur_sum = np.sum(unrelated_vectors)
+    og_sum = np.sum(np.array(og_query_vector)) #not sure on this part 
+
+    #og_query_vec = 
+    #related_doc_vec = 
+
+    #generate related_doc_vec_sum 
+
+
+    new_vector = og_query_weight*og_query_vec + (related_weight/(len(related_links)))*r_sum - (unrelated_weight/(len(unrelated_links)))*ur_sum
+    
+    return new_vector #new the new query vector - not sure how to get words from it 
+
+
+
 def process_feedback(links):
     count = 0
     relevant_links, irrelevant_links= [], []
