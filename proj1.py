@@ -6,7 +6,7 @@ from nltk.tokenize import word_tokenize
 from googleapiclient.discovery import build
 import pprint
 #print(sw_nltk)
-import urllib2  # the lib that handles the url stuff
+import urllib.request  # the lib that handles the url stuff
 from sklearn.feature_extraction.text import TfidfVectorizer #used to make document vectors 
 from sklearn.metrics.pairwise import cosine_similarity
 '''
@@ -23,8 +23,8 @@ user
 
 
 
-def link_to_text(target_url)
-    data = urllib2.urlopen(target_url) # it's a file like object and works just like a file
+def link_to_text(target_url):
+    data = urllib.request.urlopen(target_url) # it's a file like object and works just like a file
     return_str = ""
     for line in data: # files are iterable
         return_str += line
@@ -62,7 +62,8 @@ def text_vectors(text):
 #not sure what to set og_query_weight, related_weight, unrelated_weights to? think this may need to be a part we figure out 
 #not exactly sure what og_query_vector will be? 
 #also given new query vector - how do we get the exact words? 
-def rocchios(query_words,og_query_vector, related_links,unrelated_links,og_query_weight, related_weight, unrelated_weight):
+def rocchios(og_query_vector, related_links,unrelated_links,og_query_weight, related_weight, unrelated_weight):
+    #og_query_vector = og_query_vector.split(' ')
     #how to generate the vector for a document 
     related_vectors = []
     for link in related_links:
@@ -113,12 +114,12 @@ def process_feedback(links):
             irrelevant_links.append(links[i])
     print('The current precision level out of 10 is: ',count)
     if count>=9:
-        return True, relevant_links
+        return True, relevant_links, irrelevant_links
     else:
-        return False, relevant_links
+        return False, relevant_links, irrelevant_links
 
 
-def main():
+def scrape_web(query):
     service = build(
         "customsearch", "v1", developerKey="AIzaSyC0vz_nYIczwBwNupqMrNhmBm4dQbX5Pbw"
     )
@@ -126,15 +127,28 @@ def main():
     res = (
         service.cse()
         .list(
-            q="columbia",
+            q=query,
             cx="7260228cc892a415a",
         )
         .execute()
     )
     pprint.pprint(res)
+    links = []
     for result in res['items']:
+        links.append(result.get('link'))
         print(result.get('link'))
-    links = ['1','2','3','4','5','6','7','8','9','10']
+    return links
+
+def main():
+    inp = input('What would you like to search for?')
+    while True:
+        links = scrape_web(inp)
+        result, relevant_links,irrelevant_links = process_feedback(links)
+        if result:
+            exit()
+        new_search_input = rocchios(input,relevant_links, irrelevant_links,0.3,0.4,0.3)
+        inp = new_search_input.split(' ')
+    
     result, relevant_links = process_feedback(links)
     print(result)
 
