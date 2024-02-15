@@ -64,19 +64,26 @@ def text_vectors(text, stopwords):
     #clean up text 
 
     #covert to tokens 
+    good_text = []
+
     text = word_tokenize(text)
-
+    print(text) #appears to be in sort of a tuple format 
     #remove stop words 
-    good_text = "" #not positive if this was done properly 
-    for word in text:
+    #good_text = "" #not positive if this was done properly 
+    filtered_tokens = [word for word in text if word.isalnum() and word not in stopwords]
+    good_text.append(' '.join(filtered_tokens))
+    
+    '''for word in text:
         if word not in stopwords:
+            #print(word)
             good_text += word
-            good_text += " "
+            good_text += " "'''
 
-    generator = string_generator(good_text)
+    generator = good_text 
+    #generator = string_generator(good_text)
     vectorizer = TfidfVectorizer()
     mat = vectorizer.fit_transform(generator) #td-idf vectors 
-    cosine_similarity(query_vector, tfidf_matrix)
+    cosine_similarities = cosine_similarity(mat, mat) #not sure on this part 
     #extract most relevant column 
     id = cosine_similarities.argmax()
     important_vec = mat[id]
