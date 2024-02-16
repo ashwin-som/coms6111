@@ -57,7 +57,7 @@ def link_to_text(target_url):
     return return_str
 
 
-def text_vectors(text, stopwords, query_words):
+def text_vectors(all_text, stopwords, query_words):
     ''' given a text, generate the vectors for the documents'''
     #stop words 
     #sw_nltk = stopwords.words('english')
@@ -66,19 +66,14 @@ def text_vectors(text, stopwords, query_words):
 
     #covert to tokens 
     good_text = []
+    for text in all_text:
+        text = word_tokenize(text)
+        #print(text) #appears to be in sort of a tuple format 
+        #remove stop words 
+        #good_text = "" #not positive if this was done properly 
+        filtered_tokens = [word for word in text if word.isalnum() and word not in stopwords]
+        good_text.append(' '.join(filtered_tokens))
 
-    text = word_tokenize(text)
-    #print(text) #appears to be in sort of a tuple format 
-    #remove stop words 
-    #good_text = "" #not positive if this was done properly 
-    filtered_tokens = [word for word in text if word.isalnum() and word not in stopwords]
-    good_text.append(' '.join(filtered_tokens))
-    
-    '''for word in text:
-        if word not in stopwords:
-            #print(word)
-            good_text += word
-            good_text += " "'''
 
     generator = good_text 
     #generator = string_generator(good_text)
@@ -109,6 +104,7 @@ def rocchios(og_query_vector, related_links,unrelated_links,og_query_weight, rel
     #og_query_vector = og_query_vector.split(' ')
     #how to generate the vector for a document 
     related_vectors = []
+    all_textsr = [ ]
     counter = 0 
     for link in related_links:
         #convert to text 
@@ -116,14 +112,32 @@ def rocchios(og_query_vector, related_links,unrelated_links,og_query_weight, rel
         counter += 1 
         try:
             text = link_to_text(link)
-            vector = text_vectors(text,stopwords,og_query_vector)
-            related_vectors.append(vector)
+            all_textsr.append(text)
         except: #convert text to just be the headline? 
         #convert to vector 
             print("we cannot use this related link")
+    vector = text_vectors(all_textsr,stopwords,og_query_vector)
+    related_vectors.append(vector)
     related_vectors = np.array(related_vectors)
 
     unrelated_vectors = []
+    all_textsu = [ ]
+    counter = 0 
+    for link in unrelated_links:
+        #convert to text 
+        print(counter) #happens on the 3rd article i think 
+        counter += 1 
+        #try:
+        text = link_to_text(link)
+        all_textsu.append(text)
+        #except: #convert text to just be the headline? 
+        #convert to vector 
+            #print("we cannot use this related link")
+    vector2 = text_vectors(all_textsu,stopwords,og_query_vector)
+    unrelated_vectors.append(vector2)
+    unrelated_vectors = np.array(related_vectors)
+
+    '''unrelated_vectors = []
     counter2 = 0 
     for link2 in unrelated_links:
         #convert to text 
@@ -136,7 +150,7 @@ def rocchios(og_query_vector, related_links,unrelated_links,og_query_weight, rel
             unrelated_vectors.append(vector2)
         except: 
             print("we cannot use this unrelated link")
-    unrelated_vectors = np.array(unrelated_vectors)
+    unrelated_vectors = np.array(unrelated_vectors)'''
 
     #get sums of vectors
     for i in range(len(related_vectors)):
