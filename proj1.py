@@ -174,20 +174,47 @@ def rocchios(og_query_vector, related_links,unrelated_links,og_query_weight, rel
     
     return new_vector #new the new query vector - not sure how to get words from it 
 
+def generate_new_input(input,related_res,unrelated_res):
+    documents = []
+    for i in related_res:
+        documents.append(i)
+    for i in unrelated_res:
+        documents.append(i)
 
+    V = TfidfVectorizer()
+    V.fit_transform(documents)
+
+    input_vector = V.transform([input])
+    related_list = []
+    for i in related_res:
+        related_list.append(V.transform([i]))
+    related_vectors = np.array(related_list)
+    unrelated_list = []
+    for i in unrelated_res:
+        unrelated_list.append(V.transform([i]))
+    unrelated_vectors = np.array(unrelated_list)
+
+    a,b,c = 0.9,0.6,0.3
+    new_input_vector = a*input_vector+(b*np.sum(related_vectors)/len(related_list))-(c*np.sum(unrelated_vectors)/len(unrelated_list))
+    print(new_input_vector)
+    new_input_words = V.inverse_transform(new_input_vector)
+    print(new_input_words)
+    
+    return 
 
 def process_feedback(links):
     count = 0
     relevant_links, irrelevant_links= [], []
     for i in range(len(links)):
         print('Document #: ',i)
-        print(links[i])
+        print(links[i].get('link'))
+        print(links[i].get('snippet'))
         answer = input('Is the document above relevant to your search query? (Y/N): ')
         if answer.lower()=='y':
-            relevant_links.append(links[i])
+            relevant_links.append(links[i].get('snippet'))
             count+=1
         else:
-            irrelevant_links.append(links[i])
+            irrelevant_links.append(links[i].get('snippet'))
     print('The current precision level out of 10 is: ',count)
     if count>=9:
         return True, relevant_links, irrelevant_links
@@ -208,11 +235,12 @@ def scrape_web(query):
         )
         .execute()
     )
-    pprint.pprint(res)
+    #pprint.pprint(res)
     links = []
     for result in res['items']:
-        links.append(result.get('link'))
-        print(result.get('link'))
+        links.append(result)
+        print('#1: ',result.get('snippet'))
+        print(' ')
     return links
 
 def main():
@@ -222,8 +250,10 @@ def main():
         result, relevant_links,irrelevant_links = process_feedback(links)
         if result:
             exit()
-        print(inp)
-        new_search_input = rocchios([inp],relevant_links, irrelevant_links,0.3,0.4,0.3,stop_set)
+        #print(inp)
+        generate_new_input(inp,relevant_links,irrelevant_links)
+        break
+        #new_search_input = rocchios([inp],relevant_links, irrelevant_links,0.3,0.4,0.3,stop_set)
         inp = new_search_input.split(' ')
     
     result, relevant_links = process_feedback(links)
