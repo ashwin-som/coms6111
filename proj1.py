@@ -177,8 +177,7 @@ def rocchios(og_query_vector, related_links,unrelated_links,og_query_weight, rel
     return new_vector #new the new query vector - not sure how to get words from it 
 
 def generate_new_input(input,related_res,unrelated_res):
-    print("input is")
-    print(input)
+
     documents = []
     for i in related_res:
         documents.append(i)
@@ -191,33 +190,41 @@ def generate_new_input(input,related_res,unrelated_res):
     input_vector = V.transform(input)
     related_list = []
     for i in related_res:
+        print("printing related")
+        print(V.transform([i]))
         related_list.append(V.transform([i]))
     related_vectors = np.array(related_list)
     unrelated_list = []
     for i in unrelated_res:
+        print("printing unrelated")
+        print(V.transform([i]))
         unrelated_list.append(V.transform([i]))
     unrelated_vectors = np.array(unrelated_list)
 
     a,b,c = 0.9,0.6,0.1
+    print("printing sizes")
+    print(input_vector.shape)
+    print(related_vectors.shape)
+    print(unrelated_vectors.shape)
     new_input_vector_big = a*input_vector+(b*np.sum(related_vectors)/len(related_list))-(c*np.sum(unrelated_vectors)/len(unrelated_list))
-    print("printing new vector")
+    #print("printing new vector")
 
-    print(new_input_vector_big.shape)
+    #print(new_input_vector_big.shape)
 
     #temp_arr = new_input_vector_big.toarray()
     #print(temp_arr)
     #sorted_temp = np.sort(temp_arr, axis = 1)
     #new_input_vector_big = csr_matrix(sorted_temp)
     print(new_input_vector_big)
-    length = new_input_vector_big.shape[1]
-    print(length)
+    #length = new_input_vector_big.shape[1]
+    #print(length)
     #new_input_vector = new_input_vector_big[length-3:,:] #extract last two 
-    new_input_vector = new_input_vector_big[:,-2:] #extract last two
-    print(new_input_vector)
-    print(new_input_vector.shape)
+    new_input_vector = new_input_vector_big[:,-1:] #extract last two
+    #print(new_input_vector)
+    #print(new_input_vector.shape)
     new_input_words = V.inverse_transform(new_input_vector)
-    print("printing new input words")
-    print(new_input_words)
+    #print("printing new input words")
+    #print(new_input_words)
     for item in new_input_words:
         for item2 in item:
             input.append(item2)
