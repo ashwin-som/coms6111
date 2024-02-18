@@ -13,6 +13,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer #used to make docume
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import normalize
 
+from scipy.sparse import csr_matrix
+
 nltk.download('stopwords')
 nltk.download('punkt')
 '''
@@ -175,6 +177,8 @@ def rocchios(og_query_vector, related_links,unrelated_links,og_query_weight, rel
     return new_vector #new the new query vector - not sure how to get words from it 
 
 def generate_new_input(input,related_res,unrelated_res):
+    print("input is")
+    print(input)
     documents = []
     for i in related_res:
         documents.append(i)
@@ -184,7 +188,7 @@ def generate_new_input(input,related_res,unrelated_res):
     V = TfidfVectorizer()
     V.fit_transform(documents)
 
-    input_vector = V.transform([input])
+    input_vector = V.transform(input)
     related_list = []
     for i in related_res:
         related_list.append(V.transform([i]))
@@ -194,13 +198,32 @@ def generate_new_input(input,related_res,unrelated_res):
         unrelated_list.append(V.transform([i]))
     unrelated_vectors = np.array(unrelated_list)
 
-    a,b,c = 0.9,0.6,0.3
-    new_input_vector = a*input_vector+(b*np.sum(related_vectors)/len(related_list))-(c*np.sum(unrelated_vectors)/len(unrelated_list))
+    a,b,c = 0.9,0.6,0.1
+    new_input_vector_big = a*input_vector+(b*np.sum(related_vectors)/len(related_list))-(c*np.sum(unrelated_vectors)/len(unrelated_list))
+    print("printing new vector")
+
+    print(new_input_vector_big.shape)
+
+    #temp_arr = new_input_vector_big.toarray()
+    #print(temp_arr)
+    #sorted_temp = np.sort(temp_arr, axis = 1)
+    #new_input_vector_big = csr_matrix(sorted_temp)
+    print(new_input_vector_big)
+    length = new_input_vector_big.shape[1]
+    print(length)
+    #new_input_vector = new_input_vector_big[length-3:,:] #extract last two 
+    new_input_vector = new_input_vector_big[:,-2:] #extract last two
     print(new_input_vector)
+    print(new_input_vector.shape)
     new_input_words = V.inverse_transform(new_input_vector)
+    print("printing new input words")
     print(new_input_words)
-    
-    return 
+    for item in new_input_words:
+        for item2 in item:
+            input.append(item2)
+    print("new input is")
+    print(input)
+    return input
 
 def process_feedback(links):
     count = 0
@@ -245,16 +268,17 @@ def scrape_web(query):
 
 def main():
     inp = input('What would you like to search for?')
+    inp_arr = [inp]
     while True:
         links = scrape_web(inp)
         result, relevant_links,irrelevant_links = process_feedback(links)
         if result:
             exit()
         #print(inp)
-        generate_new_input(inp,relevant_links,irrelevant_links)
-        break
+        inp_arr = generate_new_input(inp_arr,relevant_links,irrelevant_links)
+        #break
         #new_search_input = rocchios([inp],relevant_links, irrelevant_links,0.3,0.4,0.3,stop_set)
-        inp = new_search_input.split(' ')
+        #inp = new_search_input.split(' ')
     
     result, relevant_links = process_feedback(links)
     print(result)
