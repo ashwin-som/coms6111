@@ -270,7 +270,7 @@ def main():
     inp = input('What would you like to search for?')
     inp_arr = [inp]
     while True:
-        links = scrape_web(inp)
+        links = scrape_web(inp_arr)
         result, relevant_links,irrelevant_links = process_feedback(links)
         if result:
             exit()
