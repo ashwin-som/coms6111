@@ -184,9 +184,9 @@ def generate_new_input(input,related_res,unrelated_res):
     for i in unrelated_res:
         documents.append(i)
 
-    V = TfidfVectorizer(stop_words='english')
+    V = TfidfVectorizer(stop_words='english',token_pattern=u'(?ui)\\b\\w*[a-z]+\\w*\\b')
     V.fit_transform(documents)
-
+    #print('feature names: ',V.get_feature_names_out())
     input_vector = V.transform(input)
     related_list = []
     for i in related_res:
@@ -240,10 +240,10 @@ def generate_new_input(input,related_res,unrelated_res):
     for word in V.vocabulary_:
         weight = new_input_array[V.vocabulary_[word]]
         heapq.heappush(word_heap,(-weight,word))
-    print(word_heap)
+    #print(word_heap)
     top_2_words = []
     input_words = V.inverse_transform(input_vector)[0]
-    print('input words: ',input_words)
+    #print('input words: ',input_words)
     while len(word_heap)!=0:
         _,word = heapq.heappop(word_heap)
         if word in input_words:
@@ -279,6 +279,8 @@ def process_feedback(links):
     print('The current precision level out of 10 is: ',count)
     if count>=9:
         return True, relevant_links, irrelevant_links
+    elif count==0:
+        return True,relevant_links, irrelevant_links
     else:
         return False, relevant_links, irrelevant_links
 
