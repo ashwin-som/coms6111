@@ -12,7 +12,7 @@ import requests
 from sklearn.feature_extraction.text import TfidfVectorizer #used to make document vectors 
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import normalize
-
+import heapq
 from scipy.sparse import csr_matrix
 
 nltk.download('stopwords')
@@ -184,28 +184,28 @@ def generate_new_input(input,related_res,unrelated_res):
     for i in unrelated_res:
         documents.append(i)
 
-    V = TfidfVectorizer()
+    V = TfidfVectorizer(stop_words='english')
     V.fit_transform(documents)
 
     input_vector = V.transform(input)
     related_list = []
     for i in related_res:
-        print("printing related")
-        print(V.transform([i]))
+        #print("printing related")
+        #print(V.transform([i]))
         related_list.append(V.transform([i]))
     related_vectors = np.array(related_list)
     unrelated_list = []
     for i in unrelated_res:
-        print("printing unrelated")
-        print(V.transform([i]))
+        #print("printing unrelated")
+        #print(V.transform([i]))
         unrelated_list.append(V.transform([i]))
     unrelated_vectors = np.array(unrelated_list)
 
     a,b,c = 0.9,0.6,0.1
-    print("printing sizes")
-    print(input_vector.shape)
-    print(related_vectors.shape)
-    print(unrelated_vectors.shape)
+    #print("printing sizes")
+    #print(input_vector.shape)
+    #print(related_vectors.shape)
+    #print(unrelated_vectors.shape)
     new_input_vector_big = a*input_vector+(b*np.sum(related_vectors)/len(related_list))-(c*np.sum(unrelated_vectors)/len(unrelated_list))
     #print("printing new vector")
 
@@ -215,22 +215,53 @@ def generate_new_input(input,related_res,unrelated_res):
     #print(temp_arr)
     #sorted_temp = np.sort(temp_arr, axis = 1)
     #new_input_vector_big = csr_matrix(sorted_temp)
-    print(new_input_vector_big)
+    #print(new_input_vector_big)
     #length = new_input_vector_big.shape[1]
     #print(length)
     #new_input_vector = new_input_vector_big[length-3:,:] #extract last two 
-    new_input_vector = new_input_vector_big[:,-1:] #extract last two
+    #new_input_vector = new_input_vector_big[:,-1:] #extract last two
     #print(new_input_vector)
     #print(new_input_vector.shape)
-    new_input_words = V.inverse_transform(new_input_vector)
+
+
+    #new_input_words = V.inverse_transform(new_input_vector_big)
+
+
     #print("printing new input words")
     #print(new_input_words)
-    for item in new_input_words:
+    '''for item in new_input_words:
         for item2 in item:
             input.append(item2)
     print("new input is")
-    print(input)
-    return input
+    print(input)'''
+    new_input_array = new_input_vector_big.toarray()[0]
+    word_heap = []
+    heapq.heapify(word_heap)
+    for word in V.vocabulary_:
+        weight = new_input_array[V.vocabulary_[word]]
+        heapq.heappush(word_heap,(-weight,word))
+    print(word_heap)
+    top_2_words = []
+    input_words = V.inverse_transform(input_vector)[0]
+    print('input words: ',input_words)
+    while len(word_heap)!=0:
+        _,word = heapq.heappop(word_heap)
+        if word in input_words:
+            continue
+        else:
+            top_2_words.append(word)
+            if len(top_2_words)==2:
+                break
+    
+    #print(top_2_words)
+    #top_2_words.insert(0,input)
+    resulting_input = ''
+    for i in input:
+        resulting_input+=i+' '
+    for i in top_2_words:
+        resulting_input+=i+' '
+    print(resulting_input)
+    return resulting_input
 
 def process_feedback(links):
     count = 0
@@ -269,8 +300,8 @@ def scrape_web(query):
     links = []
     for result in res['items']:
         links.append(result)
-        print('#1: ',result.get('snippet'))
-        print(' ')
+        #print('#1: ',result.get('snippet'))
+        #print(' ')
     return links
 
 def main():
