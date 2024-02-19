@@ -14,6 +14,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import normalize
 import heapq
 from scipy.sparse import csr_matrix
+import sys
 
 nltk.download('stopwords')
 nltk.download('punkt')
@@ -59,122 +60,6 @@ def link_to_text(target_url):
     return return_str
 
 
-def text_vectors(all_text, stopwords, query_words):
-    ''' given a text, generate the vectors for the documents'''
-    #stop words 
-    #sw_nltk = stopwords.words('english')
-    #stop_set = set(sw_nltk)
-    #clean up text 
-
-    #covert to tokens 
-    good_text = []
-    for text in all_text:
-        text = word_tokenize(text)
-        #print(text) #appears to be in sort of a tuple format 
-        #remove stop words 
-        #good_text = "" #not positive if this was done properly 
-        filtered_tokens = [word for word in text if word.isalnum() and word not in stopwords]
-        good_text.append(' '.join(filtered_tokens))
-
-
-    generator = good_text 
-    #generator = string_generator(good_text)
-    vectorizer = TfidfVectorizer()
-    mat = vectorizer.fit_transform(generator) #td-idf vectors 
-    #mat = vectorizer.fit(good_text)
-    mat_normalized = normalize(mat)
-    query_size = len(vectorizer.get_feature_names_out())
-    keyword_vector = normalize(vectorizer.transform(query_words).toarray())
-    keyword_vector = np.sum(keyword_vector, axis=0, keepdims=True)
-    print(query_size)
-    query_vector = np.zeros((1, query_size))
-    query_vector[:, :keyword_vector.shape[1]] = keyword_vector
-
-
-    cosine_similarities = cosine_similarity(mat_normalized,query_vector) #not sure on this part 
-    #extract most relevant column 
-    id = cosine_similarities.argmax()
-    important_vec = mat_normalized[id]
-
-    return important_vec
-
-
-#not sure what to set og_query_weight, related_weight, unrelated_weights to? think this may need to be a part we figure out 
-#not exactly sure what og_query_vector will be? 
-#also given new query vector - how do we get the exact words? 
-def rocchios(og_query_vector, related_links,unrelated_links,og_query_weight, related_weight, unrelated_weight,stopwords):
-    #og_query_vector = og_query_vector.split(' ')
-    #how to generate the vector for a document 
-    related_vectors = []
-    all_textsr = [ ]
-    counter = 0 
-    for link in related_links:
-        #convert to text 
-        print(counter) #happens on the 3rd article i think 
-        counter += 1 
-        try:
-            text = link_to_text(link)
-            all_textsr.append(text)
-        except: #convert text to just be the headline? 
-        #convert to vector 
-            print("we cannot use this related link")
-    vector = text_vectors(all_textsr,stopwords,og_query_vector)
-    related_vectors.append(vector)
-    related_vectors = np.array(related_vectors)
-
-    unrelated_vectors = []
-    all_textsu = [ ]
-    counter = 0 
-    for link in unrelated_links:
-        #convert to text 
-        print(counter) #happens on the 3rd article i think 
-        counter += 1 
-        #try:
-        text = link_to_text(link)
-        all_textsu.append(text)
-        #except: #convert text to just be the headline? 
-        #convert to vector 
-            #print("we cannot use this related link")
-    vector2 = text_vectors(all_textsu,stopwords,og_query_vector)
-    unrelated_vectors.append(vector2)
-    unrelated_vectors = np.array(related_vectors)
-
-    '''unrelated_vectors = []
-    counter2 = 0 
-    for link2 in unrelated_links:
-        #convert to text 
-        print(counter2) #happens on the 3rd article i think 
-        counter2 += 1
-        try:
-            text2 = link_to_text(link2)
-            #convert to vector 
-            vector2 = text_vectors(text2,stopwords,og_query_vector)
-            unrelated_vectors.append(vector2)
-        except: 
-            print("we cannot use this unrelated link")
-    unrelated_vectors = np.array(unrelated_vectors)'''
-
-    #get sums of vectors
-    for i in range(len(related_vectors)):
-        print(related_vectors[i].shape)
-    #print(related_vectors[3])
-    #print(type(related_vectors[3]))
-    #print(related_vectors[3])
-    r_sum = np.sum(related_vectors)
-    ur_sum = np.sum(unrelated_vectors)
-    og_sum = np.sum(np.array(og_query_vector)) #not sure on this part 
-
-    related_size = len(related_vectors)
-    unrelated_size = len(unrelated_vectors)
-    #og_query_vec = 
-    #related_doc_vec = 
-
-    #generate related_doc_vec_sum 
-
-
-    new_vector = og_query_weight*og_query_vec + (related_weight/(related_size))*r_sum - (unrelated_weight/(unrelated_size))*ur_sum
-    
-    return new_vector #new the new query vector - not sure how to get words from it 
 
 def generate_new_input(input,related_res,unrelated_res):
 
@@ -261,45 +146,59 @@ def generate_new_input(input,related_res,unrelated_res):
     resulting_input+=input+' ' 
     for i in top_2_words:
         resulting_input+=i+' '
-    print(resulting_input)
+    #print("current query: " + resulting_input)
+    #print(resulting_input)
     return resulting_input
 
-def process_feedback(links):
+def process_feedback(links, precision):
+    total_count = len(links)
+    if total_count < 10: 
+        return True, "Program ended. Not enough links produced",links, links
     count = 0
     relevant_links, irrelevant_links= [], []
     for i in range(len(links)):
-        print('Document #: ',i)
+        print('Document #: ',i+1)
         print(links[i].get('link'))
         print(links[i].get('snippet'))
+        #answer = ""
         answer = input('Is the document above relevant to your search query? (Y/N): ')
-        if answer.lower()=='y':
-            relevant_links.append(links[i].get('snippet'))
-            count+=1
-        else:
-            irrelevant_links.append(links[i].get('snippet'))
-    print('The current precision level out of 10 is: ',count)
-    if count>=9:
-        return True, relevant_links, irrelevant_links
+        while True:#answer.lower() != 'y' and answer.lower() != 'n':
+            #answer = input('Is the document above relevant to your search query? (Y/N): ')
+            if answer.lower()=='y':
+                relevant_links.append(links[i].get('snippet'))
+                count+=1
+                break
+            elif answer.lower()=='n':
+                irrelevant_links.append(links[i].get('snippet'))
+                break
+            else: #tell user they need to answer again 
+                answer = input('Oops, not a valid response! Is the document above relevant to your search query? (Y/N): ')
+
+    prec_val = float(count)/float(total_count)
+    print("")
+    print('The current precision level is: ',prec_val)
+    if prec_val >=precision:
+        return True, "Success! Desired precision reached!",relevant_links, irrelevant_links
     elif count==0:
-        return True,relevant_links, irrelevant_links
+        return True, "Program ended. No more relevant links",relevant_links, irrelevant_links
     else:
-        return False, relevant_links, irrelevant_links
+        return False, "keep going",relevant_links, irrelevant_links
 
 
-def scrape_web(query):
+def scrape_web(query, key, id):
     service = build(
-        "customsearch", "v1", developerKey="AIzaSyC0vz_nYIczwBwNupqMrNhmBm4dQbX5Pbw"
+        "customsearch", "v1", developerKey=key
     )
 
     res = (
         service.cse()
         .list(
             q=query,
-            cx="7260228cc892a415a",
+            cx=id,
         )
         .execute()
     )
-    pprint.pprint(res)
+    #pprint.pprint(res)
     links = []
     for result in res['items']:
         links.append(result)
@@ -309,21 +208,46 @@ def scrape_web(query):
     return links
 
 def main():
-    inp = input('What would you like to search for?')
+    #/home/gkaraman/run <google api key> <google engine id> <precision> <query>
+    #key = "AIzaSyC0vz_nYIczwBwNupqMrNhmBm4dQbX5Pbw"
+    #id = "7260228cc892a415a"
+    i = 1 
+    google_api = sys.argv[0+i]
+    google_engine = sys.argv[1+i]
+    key = google_api
+    id = google_engine
+    precision = float(sys.argv[2+i])
+    inp = sys.argv[3+i]
+    #inp = input('What would you like to search for?')
+    print("")
+    print("Paramters: ")
+    print("Client Key = " + str(key))
+    print("Engine Key = " + str(id))
+    print("Desired Precision = " + str(precision))
+    print("Query = " + str(inp))
+    print("")
+    if inp == '' or inp == ' ':
+        print("error, no queries given")
+        return
+    #precision = .9
     while True:
-        links = scrape_web(inp)
-        result, relevant_links,irrelevant_links = process_feedback(links)
+        links = scrape_web(inp,key, id)
+        result, output_text, relevant_links,irrelevant_links = process_feedback(links, precision)
         if result:
+            print(output_text)
+            #print("precision: " + )
             exit()
         #print(inp)
         
         inp = generate_new_input(inp,relevant_links,irrelevant_links)
+        print("Current Query = " + str(inp))
+        print("")
         #inp_arr = inp_arr.split(' ')
         #break
         #new_search_input = rocchios([inp],relevant_links, irrelevant_links,0.3,0.4,0.3,stop_set)
         #inp = new_search_input.split(' ')
     
-    result, relevant_links = process_feedback(links)
+    result, output_text,relevant_links, irrelevant_links = process_feedback(links, precision)
     print(result)
 
 if __name__ == "__main__":
@@ -334,6 +258,128 @@ if __name__ == "__main__":
 
 
 
+
+
+
+
+
+'''
+def text_vectors(all_text, stopwords, query_words):
+    
+    #stop words 
+    #sw_nltk = stopwords.words('english')
+    #stop_set = set(sw_nltk)
+    #clean up text 
+
+    #covert to tokens 
+    good_text = []
+    for text in all_text:
+        text = word_tokenize(text)
+        #print(text) #appears to be in sort of a tuple format 
+        #remove stop words 
+        #good_text = "" #not positive if this was done properly 
+        filtered_tokens = [word for word in text if word.isalnum() and word not in stopwords]
+        good_text.append(' '.join(filtered_tokens))
+
+
+    generator = good_text 
+    #generator = string_generator(good_text)
+    vectorizer = TfidfVectorizer()
+    mat = vectorizer.fit_transform(generator) #td-idf vectors 
+    #mat = vectorizer.fit(good_text)
+    mat_normalized = normalize(mat)
+    query_size = len(vectorizer.get_feature_names_out())
+    keyword_vector = normalize(vectorizer.transform(query_words).toarray())
+    keyword_vector = np.sum(keyword_vector, axis=0, keepdims=True)
+    print(query_size)
+    query_vector = np.zeros((1, query_size))
+    query_vector[:, :keyword_vector.shape[1]] = keyword_vector
+
+
+    cosine_similarities = cosine_similarity(mat_normalized,query_vector) #not sure on this part 
+    #extract most relevant column 
+    id = cosine_similarities.argmax()
+    important_vec = mat_normalized[id]
+
+    return important_vec
+
+
+#not sure what to set og_query_weight, related_weight, unrelated_weights to? think this may need to be a part we figure out 
+#not exactly sure what og_query_vector will be? 
+#also given new query vector - how do we get the exact words? 
+def rocchios(og_query_vector, related_links,unrelated_links,og_query_weight, related_weight, unrelated_weight,stopwords):
+    #og_query_vector = og_query_vector.split(' ')
+    #how to generate the vector for a document 
+    related_vectors = []
+    all_textsr = [ ]
+    counter = 0 
+    for link in related_links:
+        #convert to text 
+        print(counter) #happens on the 3rd article i think 
+        counter += 1 
+        try:
+            text = link_to_text(link)
+            all_textsr.append(text)
+        except: #convert text to just be the headline? 
+        #convert to vector 
+            print("we cannot use this related link")
+    vector = text_vectors(all_textsr,stopwords,og_query_vector)
+    related_vectors.append(vector)
+    related_vectors = np.array(related_vectors)
+
+    unrelated_vectors = []
+    all_textsu = [ ]
+    counter = 0 
+    for link in unrelated_links:
+        #convert to text 
+        print(counter) #happens on the 3rd article i think 
+        counter += 1 
+        #try:
+        text = link_to_text(link)
+        all_textsu.append(text)
+        #except: #convert text to just be the headline? 
+        #convert to vector 
+            #print("we cannot use this related link")
+    vector2 = text_vectors(all_textsu,stopwords,og_query_vector)
+    unrelated_vectors.append(vector2)
+    unrelated_vectors = np.array(related_vectors)
+
+    unrelated_vectors = []
+    counter2 = 0 
+    for link2 in unrelated_links:
+        #convert to text 
+        print(counter2) #happens on the 3rd article i think 
+        counter2 += 1
+        try:
+            text2 = link_to_text(link2)
+            #convert to vector 
+            vector2 = text_vectors(text2,stopwords,og_query_vector)
+            unrelated_vectors.append(vector2)
+        except: 
+            print("we cannot use this unrelated link")
+    unrelated_vectors = np.array(unrelated_vectors)
+
+    #get sums of vectors
+    for i in range(len(related_vectors)):
+        print(related_vectors[i].shape)
+    #print(related_vectors[3])
+    #print(type(related_vectors[3]))
+    #print(related_vectors[3])
+    r_sum = np.sum(related_vectors)
+    ur_sum = np.sum(unrelated_vectors)
+    og_sum = np.sum(np.array(og_query_vector)) #not sure on this part 
+
+    related_size = len(related_vectors)
+    unrelated_size = len(unrelated_vectors)
+    #og_query_vec = 
+    #related_doc_vec = 
+
+    #generate related_doc_vec_sum 
+
+
+    new_vector = og_query_weight*og_query_vec + (related_weight/(related_size))*r_sum - (unrelated_weight/(unrelated_size))*ur_sum
+    
+    return new_vector #new the new query vector - not sure how to get words from it '''
 
 
 
