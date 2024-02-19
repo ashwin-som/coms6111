@@ -15,8 +15,7 @@ def generate_new_input(input,related_res,unrelated_res):
         documents.append(i)
     for i in unrelated_res:
         documents.append(i)
-    print("rpinting documents")
-    print(documents)
+
     V = TfidfVectorizer(stop_words='english',token_pattern=u'(?ui)\\b\\w*[a-z]+\\w*\\b')
     V.fit_transform(documents)
 
@@ -156,11 +155,11 @@ def main():
         if result:
             print(output_text)
             exit()
-        print(inp)
-        print("preventing relevant")
-        print(relevant_links)
-        print("preventing not ksflsfkslfkrelevant")
-        print(irrelevant_links)
+        #print(inp)
+        #print("preventing relevant")
+        #print(relevant_links)
+        #print("preventing not ksflsfkslfkrelevant")
+        #print(irrelevant_links)
         inp = generate_new_input(inp,relevant_links,irrelevant_links)
         print("Current Query = " + str(inp))
         print("")
