@@ -211,7 +211,7 @@ def main():
     #/home/gkaraman/run <google api key> <google engine id> <precision> <query>
     #key = "AIzaSyC0vz_nYIczwBwNupqMrNhmBm4dQbX5Pbw"
     #id = "7260228cc892a415a"
-    i = 1 
+    i = 0 
     google_api = sys.argv[0+i]
     google_engine = sys.argv[1+i]
     key = google_api
