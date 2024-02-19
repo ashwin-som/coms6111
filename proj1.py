@@ -48,18 +48,16 @@ def generate_new_input(input,related_res,unrelated_res):
             if len(top_2_words)==1:
                 break
     
-    resulting_input = ''
-    
-    resulting_input+=input+' ' 
+    resulting_input = input
     for i in top_2_words:
-        resulting_input+=i+' '
+        resulting_input+=' '+i
     
     return resulting_input
 
-def process_feedback(links, precision, prev_precision):
+def process_feedback(links, precision):
     total_count = len(links)
     if total_count < 10: 
-        return True, "Program ended. Not enough links produced",links, links, prec_val
+        return True, "Program ended. Not enough links produced",links, links
     count = 0
     relevant_links, irrelevant_links= [], []
     for i in range(len(links)):
@@ -88,14 +86,12 @@ def process_feedback(links, precision, prev_precision):
     prec_val = float(count)/float(total_count)
     print("")
     print('The current precision level is: ',prec_val)
-    if prec_val < prev_precision:
-        return True,"Program ended. Precision level has decreased on iterations",relevant_links, irrelevant_links, prec_val
-    elif prec_val >=precision:
-        return True, "Success! Desired precision reached!",relevant_links, irrelevant_links, prec_val
+    if prec_val >=precision:
+        return True, "Success! Desired precision reached!",relevant_links, irrelevant_links
     elif count==0:
-        return True, "Program ended. No more relevant links",relevant_links, irrelevant_links, prec_val
+        return True, "Program ended. No more relevant links",relevant_links, irrelevant_links
     else:
-        return False, "keep going",relevant_links, irrelevant_links, prec_val
+        return False, "keep going",relevant_links, irrelevant_links
 
 
 def scrape_web(query, key, id):
@@ -143,20 +139,14 @@ def main():
         print("error, no queries given")
         return
     
-    prev_precision = 0 
 
     while True:
         links = scrape_web(inp,key, id)
-        result, output_text, relevant_links,irrelevant_links, prec_val = process_feedback(links, precision, prev_precision)
-        prev_precision = prec_val
+        result, output_text, relevant_links,irrelevant_links = process_feedback(links, precision)
         if result:
             print(output_text)
             exit()
-        #print(inp)
-        #print("preventing relevant")
-        #print(relevant_links)
-        #print("preventing not ksflsfkslfkrelevant")
-        #print(irrelevant_links)
+        
         inp = generate_new_input(inp,relevant_links,irrelevant_links)
         print("Current Query = " + str(inp))
         print("")
