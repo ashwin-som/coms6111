@@ -1,11 +1,8 @@
 import numpy as np 
 from googleapiclient.discovery import build
-import pprint
 from sklearn.feature_extraction.text import TfidfVectorizer 
 import heapq
 import sys
-#import sys
-#sys.stdout = open('output.txt','wt')
 
 
 def generate_new_input(input,related_res,unrelated_res):
@@ -134,7 +131,7 @@ def main():
     inp = ""
     for i in inp_list:
         inp += i + ' '
-    #inp = inp[:-1]
+    
     print("")
     print("Paramters: ")
     print("Client Key = " + str(key))

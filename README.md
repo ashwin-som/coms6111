@@ -20,10 +20,13 @@ main() - this is the driver function - it takes in the intitial query string, pr
 
 
 Query-Modification:
-We used Rocchio's algorithm to add new words to the query. Using the 10 links given, we read in the snippets from each of them and utilize sklearn's TfidfVectorizer() to vectorize the words. We remove any stop words from the text snippets before doing this. Once the TfidfVectorizer is created, we fit it to meet the size of the query string (which gets converted to an array of keywords), and create our related and unrelated vectors from that. Then we call the algorithm to get the centroids of each of the three components (original query vector, related vectors, and unrelated vectors). We toyed around with coefficinet values for each of the 3 weights and ultimately chose .9, .6, and .1 for final values of original query vector, related vectors, and unrelated vectors respectfully. Once the algorithm runs, we take the top word produced and add it to the query sring. We tested out adding 1 and 2 and even an implementation where depending on how high the frequency was between the top two, we decided whether to include both or just the top one. Essentially, if the frequencies were very close together we would add both, but if it was a big dropoff we would add just the top word. Ultimately, though, we found jsut adding one word still tended to work best, so we decided to just take the top word.
+We used Rocchio's algorithm to add new words to the query. Using the 10 links given, we read in the snippets from each of them and utilize sklearn's TfidfVectorizer() to vectorize the words according to tfidf scores. We remove any stop words and numbers from the text snippets before doing this. Once the TfidfVectorizer is created, we fit it to meet the size of the query string (which gets converted to an array of keywords), and create our related and unrelated vectors from that. Then we call the algorithm to get the centroids of each of the three components (original query vector, related vectors, and unrelated vectors). We toyed around with coefficinet values for each of the 3 weights and ultimately chose .9, .6, and .1 for final values of original query vector, related vectors, and unrelated vectors respectfully. Once the algorithm runs, we take the top word produced (according to tfidf score) and add it to the query string. We tested out adding 1 and 2 and even an implementation where depending on how high the frequency was between the top two, we decided whether to include both or just the top one. Essentially, if the frequencies were very close together we would add both, but if it was a big dropoff we would add just the top word. Ultimately, though, we found just adding one word still tended to work best, so we decided to just take the top word.
 
 Packages included:
-
+numpy - pip install numpy (might be pip3)
+sklearn - pip install scikit-learn (might be pip3)
+google api client - pip3 install --upgrade google-api-python-client
+sys, heapq - should be part of standard python library
 
 Google Custom Search Engine JSON API Key: AIzaSyC0vz_nYIczwBwNupqMrNhmBm4dQbX5Pbw
 Engine ID: 7260228cc892a415a
