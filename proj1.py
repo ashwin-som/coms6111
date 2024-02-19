@@ -250,7 +250,7 @@ def generate_new_input(input,related_res,unrelated_res):
             continue
         else:
             top_2_words.append(word)
-            if len(top_2_words)==2:
+            if len(top_2_words)==1:
                 break
     
     #print(top_2_words)
@@ -299,10 +299,11 @@ def scrape_web(query):
         )
         .execute()
     )
-    #pprint.pprint(res)
+    pprint.pprint(res)
     links = []
     for result in res['items']:
         links.append(result)
+        #print(result)
         #print('#1: ',result.get('snippet'))
         #print(' ')
     return links
