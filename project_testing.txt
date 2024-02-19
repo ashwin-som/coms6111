@@ -1,0 +1,305 @@
+command line: python proj1.py AIzaSyC0vz_nYIczwBwNupqMrNhmBm4dQbX5Pbw 7260228cc892a415a .9 Per Se
+
+Paramters:
+Client Key = AIzaSyC0vz_nYIczwBwNupqMrNhmBm4dQbX5Pbw
+Engine Key = 7260228cc892a415a
+Desired Precision = 0.9
+Query = Per Se
+
+Document #:  1
+Link:  https://www.thomaskeller.com/perseny
+Snippet:  Per Se. Per Se Front Door. center. About. About; Restaurant · Team · Info & Directions · Gift Experiences · Reservations; Menus & Stories. Menus & Stories
+Is the document above relevant to your search query? (Y/N): y
+Document #:  2
+Link:  https://www.merriam-webster.com/dictionary/perse
+Snippet:  The meaning of PERSE is of a dark grayish blue resembling indigo. How to use perse in a sentence. Did you know?
+Is the document above relevant to your search query? (Y/N): n
+Document #:  3
+Link:  https://www.exploretock.com/perse
+Snippet:  Opened in 2004, Per Se is Thomas Keller's acclaimed interpretation of The French Laundry in the Deutsche Bank Center at Columbus Circle.
+Is the document above relevant to your search query? (Y/N): y
+Document #:  4
+Link:  https://guide.michelin.com/us/en/new-york-state/new-york/restaurant/per-se
+Snippet:  Per Se – a Three Stars: Exceptional cuisine restaurant in the 2023 MICHELIN Guide USA. The MICHELIN inspectors' point of view, information on prices, ...
+Is the document above relevant to your search query? (Y/N): y
+Document #:  5
+Link:  https://www.instagram.com/perseny/
+Snippet:  269K Followers, 199 Following, 943 Posts - See Instagram photos and videos from Per Se (@perseny)
+Is the document above relevant to your search query? (Y/N): y
+Document #:  6
+Link:  https://en.wikipedia.org/wiki/wikt:per_se
+Snippet:  From Latin per sē (“by itself”), from per (“by, through”) and sē (“itself, himself, herself, themselves”).
+Is the document above relevant to your search query? (Y/N): n
+Document #:  7
+Link:  https://dictionary.cambridge.org/us/dictionary/english/per-se
+Snippet:  PER SE meaning: 1. by or of itself: 2. by or of itself: 3. by or of itself: . Learn more.
+Is the document above relevant to your search query? (Y/N): n
+Document #:  8
+Link:  https://en.wikipedia.org/wiki/Per_Se_(restaurant)
+Snippet:  Per Se (restaurant) ... Per Se is a New American and French restaurant located at The Shops at Columbus Circle, on the fourth floor of the Deutsche Bank Center at ...
+Is the document above relevant to your search query? (Y/N): y
+Document #:  9
+Link:  https://www.jamesperse.com/
+Snippet:  James Perse. Women. Women; Apparel. Apparel Main Menu; New Arrivals · At Home Essentials · Classics · Dresses/Jumpsuits · Sweaters/Cashmere · T-shirts.
+Is the document above relevant to your search query? (Y/N): n
+Document #:  10
+Link:  https://www.law.cornell.edu/wex/per_se
+Snippet:  Primary tabs. Latin for “by itself,” in other words, inherently. For example, in tort law, a statutory violation is negligence per se. One of the elements a ...
+Is the document above relevant to your search query? (Y/N): n
+
+The current precision level is:  0.5
+Current Query = Per Se  restaurant
+
+Document #:  1
+Link:  https://www.thomaskeller.com/perseny
+Snippet:  Private Dining & Events · Per Se. Per Se Front Door. center. About. About; Restaurant · Team · Info & Directions · Gift Experiences · Reservations; Menus & ...
+Is the document above relevant to your search query? (Y/N): y
+Document #:  2
+Link:  https://www.exploretock.com/perse
+Snippet:  Opened in 2004, Per Se is Thomas Keller's acclaimed interpretation of The ... restaurant is Chef Keller's second three-Michelin-starred property featuring ...
+Is the document above relevant to your search query? (Y/N): y
+Document #:  3
+Link:  https://www.thomaskeller.com/new-york-new-york/per-se/restaurant
+Snippet:  Opened in 2004, Per Se is Thomas Keller's acclaimed New York interpretation of The French Laundry in the Deutsche Bank Center at Columbus Circle. Designed by ...
+Is the document above relevant to your search query? (Y/N): y
+Document #:  4
+Link:  https://en.wikipedia.org/wiki/Per_Se_(restaurant)
+Snippet:  Per Se (restaurant) ... Per Se is a New American and French restaurant located at The Shops at Columbus Circle, on the fourth floor of the Deutsche Bank Center at ...
+Is the document above relevant to your search query? (Y/N): y
+Document #:  5
+Link:  https://guide.michelin.com/us/en/new-york-state/new-york/restaurant/per-se
+Snippet:  Per Se – a Three Stars: Exceptional cuisine restaurant in the 2023 MICHELIN Guide USA. The MICHELIN inspectors' point of view, information on prices, ...
+Is the document above relevant to your search query? (Y/N): y
+Document #:  6
+Link:  https://www.instagram.com/perseny/
+Snippet:  Chef Thomas Keller's 3-Star Michelin restaurant overlooking Columbus Circle & Central Park located in New York City. 10 Columbus Cir, Fl 4th, New York, ...
+Is the document above relevant to your search query? (Y/N): y
+Document #:  7
+Link:  https://www.yelp.com/biz/per-se-new-york
+Snippet:  "Costs: USD 265 to USD 450 per person + add ons Per Se, Thomas Keller's second three-Michelin-starred restaurant opened in 2004 and its exquisite flavours and ...
+Is the document above relevant to your search query? (Y/N): y
+Document #:  8
+Link:  https://www.tripadvisor.com/Restaurant_Review-g60763-d425628-Reviews-Per_Se-New_York_City_New_York.html
+Snippet:  Per Se, New York City: See 1875 unbiased reviews of Per Se, rated 4.5 of 5 on Tripadvisor and ranked #85 of 13137 restaurants in New York City.
+Is the document above relevant to your search query? (Y/N): y
+Document #:  9
+Link:  https://www.splendidtable.org/story/2013/08/30/redesigning-the-restaurant-behind-the-scenes-at-per-se-with-thomas-keller
+Snippet:  Aug 30, 2013 ... It's basically set up and organized the same way as Per Se's kitchen. There are actually six stations around this large central island. The ...
+Is the document above relevant to your search query? (Y/N): y
+Document #:  10
+Link:  https://www.donuts4dinner.com/2012/05/24/the-vegetarian-tasting-and-chefs-tasting-at-per-se/
+Snippet:  May 24, 2012 ... But Per Se is the best restaurant in the city. It's the most lavish ... Per Se is my favorite restaurant in NYC! I'm jealous you've gone as ...
+Is the document above relevant to your search query? (Y/N): y
+
+The current precision level is:  1.0
+Success! Desired precision reached!
+
+
+
+
+
+
+
+
+
+
+command line: python proj1.py AIzaSyC0vz_nYIczwBwNupqMrNhmBm4dQbX5Pbw 7260228cc892a415a .9 wojcicki
+
+Paramters:
+Client Key = AIzaSyC0vz_nYIczwBwNupqMrNhmBm4dQbX5Pbw
+Engine Key = 7260228cc892a415a
+Desired Precision = 0.9
+Query = wojcicki
+
+Document #:  1
+Link:  https://en.wikipedia.org/wiki/Susan_Wojcicki
+Snippet:  Susan Wojcicki ... Susan Diane Wojcicki (/wʊˈtʃɪtski/ woo-CHITS-kee; born July 5, 1968) is an American business executive who was the chief executive officer (CEO) ...
+Is the document above relevant to your search query? (Y/N): n
+Document #:  2
+Link:  https://twitter.com/susanwojcicki?lang=en
+Snippet:  Susan Wojcicki's posts ... 's team and innovative solutions in sustainability and security to enable transparency and accountability for countries, communities ...
+Is the document above relevant to your search query? (Y/N): n
+Document #:  3
+Link:  https://www.instagram.com/susanwojcicki/?hl=en
+Snippet:  55K Followers, 124 Following, 40 Posts - See Instagram photos and videos from Susan Wojcicki (@susanwojcicki)
+Is the document above relevant to your search query? (Y/N): n
+Document #:  4
+Link:  https://www.facebook.com/esther.wojcicki/
+Snippet:  Psi and was thriving academically. At home, he would tell us endless stories of his life and friends at Berkeley. Marco's life was cut too short. And we are all
+Is the document above relevant to your search query? (Y/N): n
+Document #:  5
+Link:  https://www.instagram.com/heywoj/?hl=en
+Snippet:  7661 Followers, 1578 Following, 1870 Posts - See Instagram photos and videos from Esther Wojcicki (@heywoj)
+Is the document above relevant to your search query? (Y/N): n
+Document #:  6
+Link:  https://www.linkedin.com/in/susan-wojcicki-b136a99
+Snippet:  View Susan Wojcicki's profile on LinkedIn, the world's largest professional community. Susan has 2 jobs listed on their profile. See the complete profile on ...
+Is the document above relevant to your search query? (Y/N): n
+Document #:  7
+Link:  https://people.com/son-of-susan-wojcicki-found-dead-at-uc-berkeley-8584597
+Snippet:  2 days ago ... Marco Troper, a UC Berkeley student who was the 19-year-old son of former YouTube CEO Susan Wojcicki, was found dead on his college campus ...
+Is the document above relevant to your search query? (Y/N): n
+Document #:  8
+Link:  https://www.linkedin.com/in/ed-wojcicki-bb02abb
+Snippet:  Author/co-author of three books, freelance writer and editor, author of a wide range of articles on topics ranging from Illinois government to Henri Nouwen to ...
+Is the document above relevant to your search query? (Y/N): n
+Document #:  9
+Link:  https://abc7chicago.com/marco-troper-former-youtube-ceo-susan-wojcicki-son-dies-uc-berkeley-student/14441325/
+Snippet:  21 hours ago ... Troper was later pronounced dead by emergency responders from the Berkeley Fire Department, the university said. YouTube CEO Susan Wojcicki ...
+Is the document above relevant to your search query? (Y/N): n
+Document #:  10
+Link:  https://www.forbes.com/profile/susan-wojcicki/
+Snippet:  32 Susan Wojcicki on the 2023 America's Self-Made Women - Susan Wojcicki was CEO of Alphabet subsidiary YouTube from 2014 until February 2023. She now.
+Is the document above relevant to your search query? (Y/N): n
+
+The current precision level is:  0.0
+Program ended. No more relevant links
+
+
+
+
+
+
+
+
+
+
+command line: python proj1.py AIzaSyC0vz_nYIczwBwNupqMrNhmBm4dQbX5Pbw 7260228cc892a415a .9 cases
+
+Paramters:
+Client Key = AIzaSyC0vz_nYIczwBwNupqMrNhmBm4dQbX5Pbw
+Engine Key = 7260228cc892a415a
+Desired Precision = 0.9
+Query = cases
+
+Document #:  1
+Link:  https://www.cases.org/
+Snippet:  From court and program offices in the Bronx, Brooklyn, and Manhattan, CASES provides community-based alternatives to jail and prison. These programs address ...
+Is the document above relevant to your search query? (Y/N): n
+Document #:  2
+Link:  https://www.icc-cpi.int/cases
+Snippet:  Banda. At large. Case also involved Saleh Mohammed Jerbo Jamus but proceedings against him were terminated on 4 October 2013 following his passing. On 7 March ...
+Is the document above relevant to your search query? (Y/N): n
+Document #:  3
+Link:  https://www.icj-cij.org/cases
+Snippet:  Main navigation ... The Court has a twofold role: to settle, in accordance with international law, legal disputes submitted to it by States (contentious cases) ...
+Is the document above relevant to your search query? (Y/N): n
+Document #:  4
+Link:  https://www.worldometers.info/coronavirus/
+Snippet:  Daily and weekly updated statistics tracking the number of COVID-19 cases, recovered, and deaths. Historical data with cumulative charts, graphs, ...
+Is the document above relevant to your search query? (Y/N): y
+Document #:  5
+Link:  https://www.casetify.com/
+Snippet:  CASETiFY - We make the most sustainable yet protective phone cases for iPhone 15 / iPhone 15 Pro / iPhone 15 Plus / iPhone 15 Pro Max and tech accessories.
+Is the document above relevant to your search query? (Y/N): n
+Document #:  6
+Link:  https://acis.eoir.justice.gov/
+Snippet:  EOIR Automated Case Information ... Please check https://www.justice.gov/eoir-operational-status for up to date closures. ... Welcome to the Automated Case ...
+Is the document above relevant to your search query? (Y/N): n
+Document #:  7
+Link:  https://casesearch.courts.state.md.us/
+Snippet:  Confidential records and information will not be returned in your search results. The information displayed on this Web Site is generated from computerized ...
+Is the document above relevant to your search query? (Y/N): n
+Document #:  8
+Link:  https://www.oyez.org/cases
+Snippet:  US Supreme Court cases from the 2023-2024 term.
+Is the document above relevant to your search query? (Y/N): n
+Document #:  9
+Link:  https://www.cdc.gov/measles/cases-outbreaks.html
+Snippet:  Measles cases in 2019 · From January 1 to December 31, 2019, 1,274* individual cases of measles were confirmed in 31 states. · This is the greatest number of ...
+Is the document above relevant to your search query? (Y/N): n
+Document #:  10
+Link:  https://pacer.uscourts.gov/
+Snippet:  Search for a case in the federal court where the case was filed, or; Search a nationwide index of federal court cases. The PACER Service Center can assist you ...
+Is the document above relevant to your search query? (Y/N): n
+
+The current precision level is:  0.1
+Current Query = cases  charts
+
+Document #:  1
+Link:  https://ourworldindata.org/covid-cases
+Snippet:  This page has a large number of charts on the pandemic. In the box below you can select any country you are interested in – or several, if you want to ...
+Is the document above relevant to your search query? (Y/N): y
+Document #:  2
+Link:  https://www.flhealthcharts.gov/ChartsDashboards/rdPage.aspx?rdReport=Covid19.Dataviewer
+Snippet:  COVID-19 Cases. Coronavirus disease 2019 (COVID-19) is a respiratory disease caused by ...
+Is the document above relevant to your search query? (Y/N): y
+Document #:  3
+Link:  https://covid.cdc.gov/
+Snippet:  Maps, charts, and data provided by CDC, updates Mondays ... This webpage presents data on COVID-19 cases with information on pregnancy status reported to CDC.
+Is the document above relevant to your search query? (Y/N): y
+Document #:  4
+Link:  https://forum.asana.com/t/filtering-global-reporting-charts-using-project-custom-fields/314416
+Snippet:  Jan 23, 2023 ... But I also run into cases like yours that require a good cleanup and consolidation of their numerous custom fields. You could start by using ...
+Is the document above relevant to your search query? (Y/N): n
+Document #:  5
+Link:  https://www.worldometers.info/coronavirus/coronavirus-cases/
+Snippet:  Updated Statistics, graphs, and data tables showing the total number of cases, cases per day, cases by country, cases outside of Hubei in China, ...
+Is the document above relevant to your search query? (Y/N): y
+Document #:  6
+Link:  https://climatecasechart.com/
+Snippet:  ... Cases in the databases are organized by type of claim and are searchable. For many cases, links are available to decisions, complaints, and other case documents ...
+Is the document above relevant to your search query? (Y/N): n
+Document #:  7
+Link:  https://climate.law.columbia.edu/node/1890
+Snippet:  Climate Case Chart Updates · January 2024 Updates to the Climate Case Charts · December 2023 Updates to the Climate Case Charts · November 2023 Updates to the ...
+Is the document above relevant to your search query? (Y/N): n
+Document #:  8
+Link:  https://medium.com/nightingale/all-about-pie-4d997e3aed2a
+Snippet:  Mar 10, 2020 ... First, the data itself; the key figure of 40% for television. The Pictorial Superiority Effect says that combining the separated pie piece with ...
+Is the document above relevant to your search query? (Y/N): n
+Document #:  9
+Link:  https://www.bls.gov/iif/nonfatal-injuries-and-illnesses-tables.htm
+Snippet:  Nov 8, 2023 ... News Release · Summary Industry Data · Interactive Charts · Charts · Cases involving days away from work and job transfer or restriction · Cases ...
+Is the document above relevant to your search query? (Y/N): n
+Document #:  10
+Link:  https://www.npr.org/sections/health-shots/2020/09/01/816707182/map-tracking-the-spread-of-the-coronavirus-in-the-u-s
+Snippet:  Mar 16, 2020 ... View NPR's graphics to see where COVID is hitting hardest in the U.S., which state outbreaks are under control and where cases are still ...
+Is the document above relevant to your search query? (Y/N): y
+
+The current precision level is:  0.5
+Current Query = cases  charts  covid
+
+Document #:  1
+Link:  https://covid.cdc.gov/
+Snippet:  ... COVID-19 cases with information on pregnancy status reported to CDC. COVID-19 is a nationally notifiable disease and reporting cases ...
+Is the document above relevant to your search query? (Y/N): y
+Document #:  2
+Link:  https://ourworldindata.org/covid-cases
+Snippet:  This page has a large number of charts on the pandemic. In the box below you can select any country you are interested in – or ...
+Is the document above relevant to your search query? (Y/N): y
+Document #:  3
+Link:  https://www.worldometers.info/coronavirus/coronavirus-cases/
+Snippet:  Updated Statistics, graphs, and data tables showing the total number of cases, cases per day, cases by country, cases outside of ...
+Is the document above relevant to your search query? (Y/N): y
+Document #:  4
+Link:  https://www.flhealthcharts.gov/ChartsDashboards/rdPage.aspx?rdReport=Covid19.Dataviewer
+Snippet:  COVID-19 Cases. Coronavirus disease 2019 (COVID-19) is a respiratory disease caused by ...
+Is the document above relevant to your search query? (Y/N): y
+Document #:  5
+Link:  https://www.nytimes.com/interactive/2021/us/covid-cases.html
+Snippet:  All-time charts show data from Jan. 21, 2020 to present. How cases, hospitalizations and deaths are trending. Each chart shows how ...
+Is the document above relevant to your search query? (Y/N): y
+Document #:  6
+Link:  https://www.npr.org/sections/health-shots/2020/09/01/816707182/map-tracking-the-spread-of-the-coronavirus-in-the-u-s
+Snippet:  Mar 16, 2020 ... View NPR's graphics to see where COVID is hitting hardest in the U.S., which state outbreaks are under control and ...
+Is the document above relevant to your search query? (Y/N): y
+Document #:  7
+Link:  https://coronavirus.jhu.edu/map.html
+Snippet:  Coronavirus COVID-19 Global Cases by the Center for Systems ... JavaScript chart by amCharts 3.21.15 2022 0 10M 20M 30M Weekly Cases.
+Is the document above relevant to your search query? (Y/N): y
+Document #:  8
+Link:  https://tools.cdc.gov/api/embed/downloader/download.asp?m=415826&c=416240
+Snippet:  ... COVID-19 cases with information on pregnancy status reported to CDC. COVID-19 is a nationally notifiable disease and reporting cases ...
+Is the document above relevant to your search query? (Y/N): y
+Document #:  9
+Link:  http://publichealth.lacounty.gov/media/coronavirus/data/
+Snippet:  Each graph shows the past 3 months ... Hospitalizations. Monthly estimates of the percent of confirmed hospitalized COVID-19 cases with ...
+Is the document above relevant to your search query? (Y/N): y
+Document #:  10
+Link:  https://dph.georgia.gov/covid-19-status-report
+Snippet:  Feb 2, 2023 ... Georgia COVID-19 status of cases and hospitalizations with interactive charts and graphs, and additional surveillance ...
+Is the document above relevant to your search query? (Y/N): y
+
+The current precision level is:  1.0
+Success! Desired precision reached!
