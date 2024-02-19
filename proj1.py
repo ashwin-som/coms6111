@@ -187,7 +187,7 @@ def generate_new_input(input,related_res,unrelated_res):
     V = TfidfVectorizer(stop_words='english',token_pattern=u'(?ui)\\b\\w*[a-z]+\\w*\\b')
     V.fit_transform(documents)
     #print('feature names: ',V.get_feature_names_out())
-    input_vector = V.transform(input)
+    input_vector = V.transform([input])
     related_list = []
     for i in related_res:
         #print("printing related")
@@ -256,8 +256,9 @@ def generate_new_input(input,related_res,unrelated_res):
     #print(top_2_words)
     #top_2_words.insert(0,input)
     resulting_input = ''
-    for i in input:
-        resulting_input+=i+' '
+    #for i in input:
+        #resulting_input+=i+' '
+    resulting_input+=input+' ' 
     for i in top_2_words:
         resulting_input+=i+' '
     print(resulting_input)
@@ -308,14 +309,15 @@ def scrape_web(query):
 
 def main():
     inp = input('What would you like to search for?')
-    inp_arr = [inp]
     while True:
-        links = scrape_web(inp_arr)
+        links = scrape_web(inp)
         result, relevant_links,irrelevant_links = process_feedback(links)
         if result:
             exit()
         #print(inp)
-        inp_arr = generate_new_input(inp_arr,relevant_links,irrelevant_links)
+        
+        inp = generate_new_input(inp,relevant_links,irrelevant_links)
+        #inp_arr = inp_arr.split(' ')
         #break
         #new_search_input = rocchios([inp],relevant_links, irrelevant_links,0.3,0.4,0.3,stop_set)
         #inp = new_search_input.split(' ')
